@@ -24,6 +24,15 @@ class Key:
                     return (
                      area[i], j)
 
+    def count(self):
+        k = 0
+        for i in range(self.table.nrows):
+            for j in range(self.table.ncols):
+                # if not re.match('^\s*$', str(self.table.cell_value(i, j)).strip()):
+                if str(self.table.cell_value(i, j)).strip() != '':
+                  k += 1
+        return (k -39)
+
 
 class Window:
 
@@ -33,6 +42,8 @@ class Window:
         self.msg = tk.StringVar()
         self.window.title('钥匙查询系统')
         self.window.geometry('550x200')
+        self.num = tk.Label((self.window), font=25, text='当前仓库钥匙数：{} 把'.format(self.table.count()))
+        self.num.pack()
         self.note = tk.Label((self.window), font=25, text='请输入要查询的钥匙编号：')
         self.note.pack()
         self.entry = tk.Entry((self.window), bd=4, width=20, font=14)
@@ -44,7 +55,7 @@ class Window:
 
     def filter(self):
         text = str(self.entry.get()).strip()
-        if not re.match('^\\d{7}\\s*$', text):
+        if not re.match('^\\d{6}\\s*$', text):
             self.msg.set('钥匙号码格式错误！请检查后重新输入！')
         else:
             array = self.table.select(text)

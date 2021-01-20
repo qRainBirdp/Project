@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+<!--<h1>This my flask frame</h1>-->
+<h1>输入命令：</h1>
+<form method="post">
+    <input type="text" name="command" maxlength=55>
+    <input type="submit" value="提交"><br>
+</form>
+<table>
+    {% for a,b in info.items() %}
+    <tr>
+        <td>{{ a }}</td>
+        <td>{{ b }}</td>
+        <td><a href="/detail/{{ a }}">查看详情</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
